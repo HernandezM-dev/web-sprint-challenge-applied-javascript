@@ -58,27 +58,48 @@ const cardContainer = document.querySelector('.cards-container');
 const articles = 'https://lambda-times-backend.herokuapp.com/articles'
 axios.get(articles)
 .then(function(res){
-    let selectArticles = []
+    
+    // const section = res.data.articles;
+    let sections = []
     Object.entries(res.data.articles).forEach((entry) =>{
-        selectArticles.push(entry)
+        sections.push(entry)
+    })
+    // console.log(sections);
+
+   
+    sections.forEach(articles =>{
+        if(articles.length>1){
+            // console.log(articles)
+            let testObject;
+            articles.forEach(article =>{
+                if(article === Object(article)){
+                    testObject = article
+                }
+            })
+            console.log(testObject)
+            testObject.forEach(singles =>{
+                 const newArticle = createArticle(singles);
+                console.log(newArticle)
+                cardContainer.appendChild(newArticle);
+            })
+            
+        }
     })
 
-    let innerArticles = []
-    selectArticles.forEach(section =>{
-        console.log(section);
-        section.forEach(articles =>{
-            // console.log(articles.length);
-            // articles.forEach(article =>{
-            //     console.log(article)
-            // })
-            // const newArticle = createArticle(articles);
-            // console.log(newArticle)
-            // cardContainer.appendChild(newArticle);
-        })
-    })
-    
-    
-    
+
+    // let innerArticles = []
+    // selectArticles.forEach(section =>{
+    //     console.log(section);
+    //     section.forEach(articles =>{
+    //         // console.log(articles.length);
+    //         // articles.forEach(article =>{
+    //         //     console.log(article)
+    //         // })
+    //         // const newArticle = createArticle(articles);
+    //         // console.log(newArticle)
+    //         // cardContainer.appendChild(newArticle);
+        // })
+    // })
 
 })
 .catch(function(error){
