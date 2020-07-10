@@ -12,8 +12,16 @@
 const lambda = 'https://lambda-times-backend.herokuapp.com/topics';
 axios.get(lambda)
 .then(function(res){
-    console.log(res.data.topics)
-
+    const newTopics = res.data.topics;
+    const topicsContainer = document.querySelector('.topics')
+    // debugger
+    newTopics.forEach(element => {
+        const tab = document.createElement('div');
+        tab.classList.add('tab');
+        tab.textContent = element;
+        topicsContainer.appendChild(tab);
+    });
+    // console.log(res.data.topics)
 })
 .catch(function(error){
     debugger
